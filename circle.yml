@@ -13,4 +13,4 @@ deployment:
       - docker build -t rafaeljesus/kyp-todo .
       - docker login -e $DOCKERHUB_EMAIL -u $DOCKERHUB_USER -p $DOCKERHUB_PASS
       - docker tag rafaeljesus/kyp-todo rafaeljesus/kyp-todo:master
-      - docker push rafaeljesus/kyp-todo-todo:master
+      - docker push rafaeljesus/kyp-todo:master
