@@ -24,7 +24,7 @@ func main() {
 	v1 := e.Group("/v1")
 	v1.GET("/healthz", handlers.HealthzIndex)
 
-	v1.Use(middleware.JWT([]byte("secret")))
+	v1.Use(middleware.JWT([]byte(os.Getenv("KYP_SECRET_KEY"))))
 	v1.GET("/todos", handlers.TodosIndex)
 	v1.POST("/todos", handlers.TodosCreate)
 
