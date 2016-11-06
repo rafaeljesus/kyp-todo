@@ -11,6 +11,8 @@ import (
 	"os"
 )
 
+var KYP_TODO_PORT = os.Getenv("KYP_TODO_PORT")
+
 func main() {
 	db.Connect()
 	db.Repo.AutoMigrate(&models.Todo{})
@@ -26,7 +28,7 @@ func main() {
 	v1.GET("/todos", handlers.TodosIndex)
 	v1.POST("/todos", handlers.TodosCreate)
 
-	log.Print("Starting Kyp Todo Service...")
+	log.Print("Starting Kyp Todo Service at" + KYP_TODO_PORT)
 
-	e.Run(fasthttp.New(":" + os.Getenv("KYP_TODO_PORT")))
+	e.Run(fasthttp.New(":" + KYP_TODO_PORT))
 }
