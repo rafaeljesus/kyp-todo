@@ -7,11 +7,11 @@ import (
 
 type Todo structs.Todo
 
-func (repo *DB) Create(t *Todo) *gorm.DB {
+func (repo *DB) CreateTodo(t *Todo) *gorm.DB {
 	return repo.Create(t)
 }
 
-func (repo *DB) Search(q Query, todos *[]Todo) *gorm.DB {
+func (repo *DB) Search(q *Query, todos *[]Todo) *gorm.DB {
 	var r *gorm.DB
 
 	if q.Title != "" {
