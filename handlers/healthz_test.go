@@ -16,16 +16,15 @@ const (
 
 func TestHealthzIndex(t *testing.T) {
 	e := echo.New()
-	req, err := http.NewRequest(echo.GET, "/v1/healthz", strings.NewReader(responseJSON))
+	req, _ := http.NewRequest(echo.GET, "/v1/healthz", strings.NewReader(responseJSON))
 
-	if assert.NoError(t, err) {
-		req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
-		rec := httptest.NewRecorder()
-		ctx := e.NewContext(standard.NewRequest(req, e.Logger()), standard.NewResponse(rec, e.Logger()))
+	req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
+	rec := httptest.NewRecorder()
+	ctx := e.NewContext(standard.NewRequest(req, e.Logger()), standard.NewResponse(rec, e.Logger()))
+	env := &Env{}
 
-		if assert.NoError(t, HealthzIndex(ctx)) {
-			assert.Equal(t, http.StatusOK, rec.Code)
-			assert.Equal(t, responseJSON, rec.Body.String())
-		}
+	if assert.NoError(t, env.HealthzIndex(ctx)) {
+		assert.Equal(t, http.StatusOK, rec.Code)
+		assert.Equal(t, responseJSON, rec.Body.String())
 	}
 }

@@ -6,26 +6,26 @@ import (
 	"net/http"
 )
 
-func TodosIndex(c echo.Context) error {
+func (env *Env) TodosIndex(c echo.Context) error {
 	title := c.QueryParam("title")
 	userId := c.QueryParam("user_id")
 	query := models.Query{title, userId}
 
 	todos := []models.Todo{}
-	if err := models.Search(query, &todos).Error; err != nil {
+	if err := env.Repo.Search(&query, &todos).Error; err != nil {
 		return err
 	}
 
 	return c.JSON(http.StatusOK, todos)
 }
 
-func TodosCreate(c echo.Context) error {
-	todo := &models.Todo{}
-	if err := c.Bind(todo); err != nil {
+func (env *Env) TodosCreate(c echo.Context) error {
+	todo := models.Todo{}
+	if err := c.Bind(&todo); err != nil {
 		return err
 	}
 
-	if err := todo.Create().Error; err != nil {
+	if err := env.Repo.CreateTodo(&todo).Error; err != nil {
 		return err
 	}
 

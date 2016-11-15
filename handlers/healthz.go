@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-func HealthzIndex(c echo.Context) error {
+func (env *Env) HealthzIndex(c echo.Context) error {
 	return c.JSON(http.StatusOK, &response{Alive: true})
 }
 
