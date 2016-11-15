@@ -8,6 +8,8 @@ Env vars
 ```bash
 export KYP_TODO_DB="host=localhost dbname=kyp_todo_dev sslmode=disable"
 export KYP_TODO_PORT=3001
+export KYP_NSQ_URL=localhost:4151
+export KYP_NSQ_LOOKUPD_URL=localhost:4161
 export KYP_SECRET_KEY=c91267c27a8599ca0480ea505487d052e3b63a1dd39819db853225a518200399
 ```
 
